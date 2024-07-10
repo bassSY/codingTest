@@ -25,8 +25,6 @@ public class Example4 {
 					} else if (count == maxCount) {
 						answer = -1;
 					}
-					// System.out.println("num::" + number);
-					// System.out.println("count::" + count);
 					map.put(number, count);
 				} else {
 					answer = 0;
