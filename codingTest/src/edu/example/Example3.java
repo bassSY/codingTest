@@ -17,7 +17,6 @@ public class Example3 {
      */
     public String q1(String str) {
         List<String> strList = Arrays.asList(str.split("\\s")); // 공백 기준 String[] -> List<String>
-System.out.println("##strList##" + strList);
         Collections.reverse(strList); // list reverse 뒤집기
 
         // stream 객체 -> map: 요소들을 특정 조건에 해당하는 값으로 변환 -> collect: 필터링한 요소 수집 - 지정된 구분 기호로 구분된 입력 요소를 연결
