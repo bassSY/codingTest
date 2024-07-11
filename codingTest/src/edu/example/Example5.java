@@ -5,36 +5,47 @@ import java.util.Collections;
 
 public class Example5 {
 
-	public int[] solution7(int[] arr) {
+	public int[] solution1(String str) throws NumberFormatException {
+		String[] split = str.split("\\s"); // 공백 기준 문자 split
+		int[] numArr = Arrays.stream(split).mapToInt(Integer::parseInt).toArray(); // string[] -> int[]
 
 		// 배열 길이가 1인 경우 -1 반환
-		if (arr.length == 1) {
+		if (numArr.length == 1) {
 			int[] answer = { -1 };
 			return answer;
 		}
-		// 배열길이가 1보다 클 때 가장 작은 수를 뺀 길이의 배열로
-		int[] answer = new int[arr.length - 1];
+		int min = Arrays.stream(numArr).min().getAsInt();
+		return Arrays.stream(numArr).filter(i -> i != min).toArray();
+	}
 
-		int min = arr[0];
+	public int[] solution1Temp(String str) throws NumberFormatException {
+		String[] split = str.split("\\s"); // 공백 기준 문자 split
+		int[] numArr = Arrays.stream(split).mapToInt(Integer::parseInt).toArray(); // string[] -> int[]
 
-		// 가장 작은 수 구하기
-		for (int i = 0; i < arr.length; i++) {
-			min = Math.min(min, arr[i]);
+		if (numArr.length == 1) {
+			int[] answer = { -1 };
+			return answer;
 		}
 
-		int index = 0; // 반복문용 변수. 가장 작은 수가 여러개 일 수 있기 때문에 사용
+		int[] answer = new int[numArr.length - 1];
+		int minIndex = 0;
 
-		for (int i = 0; i < arr.length; i++) {
-			if (arr[i] == min) {
-				//continue for문으로 올라감
-				continue;
+		for (int i = 0; i < numArr.length; i++) {
+			if (numArr[minIndex] > numArr[i]) {
+				minIndex = i;
 			}
-			answer[index++] = arr[i];
 		}
+		for (int i = minIndex + 1; i < numArr.length; i++) {
+			numArr[i - 1] = numArr[i];
+		}
+		for (int i = 0; i < answer.length; i++) {
+			answer[i] = numArr[i];
+		}
+
 		return answer;
 	}
 
-	public String solution8(String new_id) {
+	public String solution2(String new_id) {
 		String answer = "";
 		String temp = new_id.toLowerCase();
 		temp = temp.replaceAll("[^-_.a-z0-9]", "");
@@ -42,8 +53,9 @@ public class Example5 {
 		temp = temp.replaceAll("[.]{2,}", ".");
 		temp = temp.replaceAll("^[.]|[.]$", "");
 		// System.out.println(temp.length());
-		if (temp.equals(""))
+		if (temp.equals("")) {
 			temp += "a";
+		}
 		if (temp.length() >= 16) {
 			temp = temp.substring(0, 15);
 			temp = temp.replaceAll("^[.]|[.]$", "");
@@ -59,7 +71,7 @@ public class Example5 {
 		return answer;
 	}
 
-	public String solution9(String s) {
+	public String solution3(String s) {
 		String answer = "";
 		String[] str = s.split("");
 //		System.out.println(Arrays.toString(str));
@@ -71,7 +83,7 @@ public class Example5 {
 		return answer;
 	}
 
-	public String solution10(String s) {
+	public String solution4(String s) {
 		String answer = "";
 		String[] numbers = s.split(" ");
 

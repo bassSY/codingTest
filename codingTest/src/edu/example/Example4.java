@@ -9,14 +9,16 @@ import java.util.Map;
 
 public class Example4 {
 
-	public int solution1(int[] array) {
+	public int solution1(String str) throws NumberFormatException {
+		String[] split = str.split("\\s"); // 공백 기준 문자 split
+		int[] numArr = Arrays.stream(split).mapToInt(Integer::parseInt).toArray(); // string[] -> int[]
 		int answer = 0;
 		int maxCount = 0;
 
 		Map<Integer, Integer> map = new HashMap<>();
 		// getOrDefault : 찾는 키가 존재한다면 찾는 키의 값을 반환하고 없다면 기본 값을 반환하는 메서드
-		if (array.length < 100) {
-			for (int number : array) {
+		if (numArr.length < 100) {
+			for (int number : numArr) {
 				if (number <= 1000) {
 					int count = map.getOrDefault(number, 0) + 1;
 					if (count > maxCount) {
@@ -88,21 +90,21 @@ public class Example4 {
 	public int solution5(int[] arr1, int[] arr2) {
 		int answer = 0;
 
-		if(arr1.length != arr2.length) {
+		if (arr1.length != arr2.length) {
 			answer = arr1.length > arr2.length ? 1 : -1;
 		} else {
 			int arr1Sum = 0;
 			int arr2Sum = 0;
-			for(int a : arr1) {
+			for (int a : arr1) {
 				arr1Sum += a;
 			}
 			for (int b : arr2) {
 				arr2Sum += b;
 			}
 
-			if(arr1Sum != arr2Sum) {
+			if (arr1Sum != arr2Sum) {
 				answer = arr1Sum > arr2Sum ? 1 : -1;
-			}else {
+			} else {
 				answer = 0;
 			}
 		}
